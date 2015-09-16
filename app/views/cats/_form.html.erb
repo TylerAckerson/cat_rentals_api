@@ -2,9 +2,15 @@
 <% cat_id = object.id %>
 <% cat_description =  object.description %>
 
-<% cat_action = object.persisted? ? "/cats/#{cat_id}" : "/cats" %>
-<% cat_method = object.persisted? ? "PATCH" : "POST" %>
-
+<% if object.persisted? %>
+  <% cat_action = "/cats/#{cat_id}" %>
+  <% cat_method = "PATCH" %>
+  <% message = "Edit cat" %>
+<% else %>
+  <% cat_action = "/cats" %>
+  <% cat_method = "POST" %>
+  <% message = "Create cat" %>
+<% end %>
 
 <form method="POST" action="<%= cat_action %>">
   <input type="hidden" name="_method" value="<%= cat_method %>" >
@@ -36,6 +42,6 @@
   <label for="cat[description]" id="cat_description">
   <input type="textarea" name="cat[description]" value="<%= cat_description %>">
 
-  <input type="submit" value="Create cat">
+  <input type="submit" value= "<%= message %>" >
 
 </form>
