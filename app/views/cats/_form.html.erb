@@ -1,0 +1,41 @@
+<% cat_name =  object.name %>
+<% cat_id = object.id %>
+<% cat_description =  object.description %>
+
+<% cat_action = object.persisted? ? "/cats/#{cat_id}" : "/cats" %>
+<% cat_method = object.persisted? ? "PATCH" : "POST" %>
+
+
+<form method="POST" action="<%= cat_action %>">
+  <input type="hidden" name="_method" value="<%= cat_method %>" >
+  <label for="cat[name]" id="cat_name">
+  <input type="text" name="cat[name]" value="<%= cat_name %>">
+    <br>
+  <label for="Cat sex">
+  <input type="radio" name="cat[sex]" id="cat_sex_female" value="F">
+  <label for="cat_sex_female">Female</label>
+    <br>
+  <input type="radio" name="cat[sex]" id="cat_sex_male" value="M">
+  <label for="cat_sex_male">Male</label>
+    <br>
+
+  <label for="cat[color]" id="cat_color">
+    <select name="cat[color]" id="cat_color">
+      <option value="brown">brown</option>
+      <option value="grey">grey</option>
+      <option value="black">black</option>
+      <option value="orange">orange</option>
+      <option value="calico">calico</option>
+      <option value="white">white</option>
+    </select>
+  <br>
+
+  <label for="cat[birth_date]" id="cat_birth_date">
+  <input type="date" name="cat[birth_date]">
+  <br>
+  <label for="cat[description]" id="cat_description">
+  <input type="textarea" name="cat[description]" value="<%= cat_description %>">
+
+  <input type="submit" value="Create cat">
+
+</form>
